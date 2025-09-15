@@ -13,23 +13,53 @@
     <meta property="og:url" content="https://songhai-summit.com/">
     <meta property="og:title" content="Songhai Leadership & Business Exchange 2025">
     <meta property="og:description" content="Ghana's premier strategic foresight summit for business leaders. November 27-28, 2025 in Accra.">
-    <meta property="og:image" content="assets/images/logo/Strategic_Business_logo.png">
+    <meta property="og:image" content="public/assets/images/logo/Strategic_Business_logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://songhai-summit.com/">
     <meta property="twitter:title" content="Songhai Leadership & Business Exchange 2025">
     <meta property="twitter:description" content="Ghana's premier strategic foresight summit for business leaders. November 27-28, 2025 in Accra.">
-    <meta property="twitter:image" content="assets/images/logo/Strategic_Business_logo.png">
+    <meta property="twitter:image" content="public/assets/images/logo/Strategic_Business_logo.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/logo/Strategic_Business_logo_main.png">
-    <link rel="apple-touch-icon" href="assets/images/logo/Strategic_Business_logo_main.png">
+    <link rel="icon" type="image/png" href="public/assets/images/logo/Strategic_Business_logo_main.png">
+    <link rel="apple-touch-icon" href="public/assets/images/logo/Strategic_Business_logo_main.png">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.4s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -63,7 +93,7 @@
         <div class="container flex items-center justify-between">
             <!-- Logo -->
             <a href="#home" class="flex items-center">
-                <img src="assets/images/logo/Strategic_Business_logo_main.png" alt="Strategic Foresight Summit Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500 p-1">
+                <img src="public/assets/images/logo/Strategic_Business_logo_main.png" alt="Strategic Foresight Summit Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500 p-1">
                 <span class="ml-3 text-gray-900 font-bold text-lg hidden md:block">Songhai Exchange</span>
             </a>
             
@@ -765,6 +795,6 @@
         gtag('config', 'GA_MEASUREMENT_ID');
     </script>
 
-    <script src="../src/js/main.js"></script>
+    <script src="src/js/main.js"></script>
 </body>
 </html>
