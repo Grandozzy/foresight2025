@@ -1,0 +1,1226 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F8FAFC; /* Light gray background */
+    color: #1F2937; /* Dark gray text */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.section-title {
+    @apply text-3xl md:text-4xl font-bold text-yellow-400 mb-6 border-b-2 border-yellow-500 pb-2;
+}
+
+.card {
+    @apply bg-white p-8 rounded-xl shadow-lg mb-20 border border-gray-200;
+}
+
+.list-item {
+    @apply flex items-start mb-2;
+}
+
+.list-item svg {
+    @apply text-yellow-400 mr-3 mt-1 flex-shrink-0;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FBBF24; /* Yellow */
+    color: #1F2937; /* Dark gray */
+    padding: 0.75rem 1rem;
+    border-radius: 9999px; /* Fully rounded */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-content {
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+}
+
+.nav-link.active {
+    color: #FBBF24; /* Yellow */
+    border-bottom: 2px solid #FBBF24;
+}
+
+/* Schedule Items */
+.schedule-item {
+    @apply flex flex-col md:flex-row bg-white p-4 rounded-lg border-l-4 border-yellow-500 shadow-md border border-gray-200;
+}
+
+.schedule-item .time {
+    @apply text-yellow-600 font-semibold text-sm md:text-base md:w-32 md:flex-shrink-0 mb-2 md:mb-0;
+}
+
+.schedule-item .content {
+    @apply md:ml-4 flex-1;
+}
+
+.schedule-item .content h4 {
+    @apply text-gray-900 font-semibold;
+}
+
+.schedule-item .content p {
+    @apply text-gray-600;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    @apply bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-500 border border-gray-200;
+}
+
+.testimonial-card .testimonial-text {
+    @apply text-gray-700 italic;
+}
+
+.testimonial-card .testimonial-author {
+    @apply text-gray-900 font-semibold;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #1F2937;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #9CA3AF;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.modal-close:hover {
+    color: #FBBF24;
+    background-color: #374151;
+}
+
+/* Form Styles */
+.form-input {
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-input:focus {
+    border-color: #FBBF24;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+/* Pricing Cards */
+.pricing-card {
+    @apply bg-gray-700 p-4 rounded-lg border border-gray-600;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    text-align: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #374151;
+    border-top: 4px solid #FBBF24;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* CTA Button Enhancements */
+.cta-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Accessibility Improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus styles for better accessibility */
+.nav-link:focus,
+.cta-button:focus,
+.form-input:focus,
+button:focus {
+    outline: 2px solid #FBBF24;
+    outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, select, textarea {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Enhanced hover effects */
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Comprehensive Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* Base Layout */
+    .container {
+        padding: 0.5rem;
+    }
+    
+    /* Typography Adjustments */
+.section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-8 border-b-2 border-yellow-500 pb-4;
+}
+
+.section-subtitle {
+    @apply text-xl md:text-2xl font-semibold text-gray-700 mb-6;
+}
+    
+    /* Navigation Improvements */
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        width: 100%;
+        border-radius: 0.5rem;
+    }
+    
+    /* Logo Adjustments */
+    .logo {
+        height: 2.5rem;
+        width: auto;
+    }
+    
+    /* Hero Section Mobile */
+    .hero-content {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 1.875rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .hero-stat-number {
+        font-size: 1.5rem;
+    }
+    
+    /* CTA Buttons Mobile */
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    /* Card Improvements */
+    .card {
+        @apply p-4 mb-8;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    /* Featured Speakers Mobile */
+    .speakers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .speaker-card {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .speaker-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .speaker-overlay {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .speaker-name {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .speaker-title {
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+    }
+    
+    .speaker-bio {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    
+    /* Benefits Section Mobile */
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-icon {
+        width: 3rem;
+        height: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-title {
+        font-size: 1.125rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .benefit-description {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    
+    /* Stats Section Mobile */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    /* Social Proof Mobile */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .testimonial-card {
+        padding: 1rem;
+    }
+    
+    .testimonial-text {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-author {
+        font-size: 0.875rem;
+    }
+    
+    /* Schedule Mobile */
+    .schedule-item {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .schedule-item .time {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .schedule-item .content {
+        margin-left: 0;
+    }
+    
+    .schedule-title {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .schedule-speaker {
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .schedule-description {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+    
+    /* Contact Form Mobile */
+    .contact-form {
+        padding: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+    }
+    
+    .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .form-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+    
+    /* Modal Mobile Improvements */
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        max-height: calc(100vh - 2rem);
+        border-radius: 1rem;
+    }
+    
+    .modal-header {
+        margin-bottom: 1rem;
+    }
+    
+    .modal-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .modal-close {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+    }
+    
+    /* Pricing Cards Mobile */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .pricing-title {
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .pricing-price {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .pricing-features {
+        margin-bottom: 1.5rem;
+    }
+    
+    .pricing-feature {
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Back to Top Button Mobile */
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Footer Mobile */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .footer-link {
+        padding: 0.5rem;
+        text-align: center;
+    }
+    
+    /* Touch-Friendly Improvements */
+    .nav-link,
+    .cta-button,
+    .form-button,
+    .modal-close,
+    .back-to-top {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Improved Spacing */
+    .section {
+        margin-bottom: 2rem;
+    }
+    
+    .section:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Text Readability */
+    p {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* List Improvements */
+    ul, ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    li {
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    
+    /* Image Responsiveness */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Table Responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 100%;
+        font-size: 0.875rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+        white-space: nowrap;
+    }
+}
+
+/* Extra Small Mobile Devices (320px and below) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.25rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .modal-content {
+        margin: 0.5rem;
+        padding: 1rem;
+        width: calc(100% - 1rem);
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .cta-button {
+        padding: 0.875rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Landscape Mobile Orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .nav-link,
+    .back-to-top,
+    .modal,
+    .loading-overlay {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .card {
+        background-color: white !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* Animation for page transitions */
+.page-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced button styles */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Success/Error message styles */
+.message {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.message.success {
+    background-color: #065F46;
+    color: #D1FAE5;
+    border: 1px solid #10B981;
+}
+
+.message.error {
+    background-color: #7F1D1D;
+    color: #FEE2E2;
+    border: 1px solid #EF4444;
+}
+
+/* Enhanced form validation styles */
+.form-input.error {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-input.success {
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #1F2937;
+    color: #E5E7EB;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* New Rectangular Speaker Card Styles */
+.speaker-card {
+    @apply bg-white p-6 rounded-xl shadow-lg transition-all duration-300 border border-gray-200;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.speaker-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+}
+
+.speaker-image-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+.speaker-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.speaker-image-container:hover .speaker-image {
+    transform: scale(1.05);
+}
+
+.speaker-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.speaker-name {
+    @apply text-xl font-bold text-gray-900 mb-2;
+}
+
+.speaker-title {
+    @apply text-sm text-gray-600 mb-3;
+}
+
+.speaker-bio {
+    @apply text-sm text-gray-700 mb-4 flex-1;
+    line-height: 1.5;
+}
+
+.speaker-topic {
+    @apply text-base font-semibold text-gray-900 mb-3;
+}
+
+.speaker-topic-title {
+    @apply text-sm font-medium text-yellow-700 mb-2;
+}
+
+.speaker-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.speaker-keyword {
+    @apply px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full;
+}
+
+/* Benefit Card Styles */
+.benefit-card {
+    @apply text-center p-6 bg-white rounded-lg transition-all duration-300 border border-gray-200 shadow-md;
+}
+
+.benefit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-icon {
+    @apply w-16 h-16 mx-auto mb-4 bg-yellow-500 rounded-full flex items-center justify-center text-white;
+}
+
+.benefit-icon svg {
+    @apply text-white;
+}
+
+.benefit-title {
+    @apply text-lg font-semibold text-gray-900 mb-3;
+}
+
+.benefit-description {
+    @apply text-gray-600;
+}
+
+/* Stats Section Styles */
+.stat-item {
+    @apply p-6 bg-white rounded-lg shadow-md border border-gray-200;
+}
+
+.stat-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-number {
+    @apply text-3xl font-bold text-yellow-600 mb-2;
+}
+
+.stat-label {
+    @apply text-gray-600 font-medium;
+}
+
+/* Testimonial Preview Styles */
+.testimonial-preview {
+    @apply bg-white p-6 rounded-lg border-l-4 border-yellow-500 shadow-md border border-gray-200;
+}
+
+/* Professional Website Best Practices Styles */
+
+/* Hero Section Enhancements */
+.hero-stats {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 text-center;
+}
+
+.hero-stat {
+    @apply p-4;
+}
+
+.hero-stat-number {
+    @apply text-2xl md:text-3xl font-bold text-yellow-400;
+}
+
+.hero-stat-label {
+    @apply text-sm text-gray-300 mt-1;
+}
+
+/* Trust Indicators */
+.trust-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-2 mb-2;
+}
+
+/* Social Proof Elements */
+.social-proof-logos {
+    @apply flex flex-wrap justify-center items-center gap-6 opacity-60 hover:opacity-100 transition-opacity duration-300;
+}
+
+.social-proof-logo {
+    @apply h-8 grayscale hover:grayscale-0 transition-all duration-300;
+}
+
+/* Call-to-Action Enhancements */
+.cta-section {
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 p-8 rounded-xl text-center;
+}
+
+.cta-urgency {
+    @apply text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded-full inline-block mb-4;
+}
+
+/* Feature Highlights */
+.feature-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.feature-item {
+    @apply flex items-start space-x-4 p-4 bg-gray-700 rounded-lg;
+}
+
+.feature-icon {
+    @apply flex-shrink-0 w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center text-gray-900;
+}
+
+/* Value Proposition Styles */
+.value-prop {
+    @apply text-center py-12 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl;
+}
+
+.value-prop-title {
+    @apply text-3xl font-bold text-white mb-4;
+}
+
+.value-prop-subtitle {
+    @apply text-xl text-yellow-400 mb-6;
+}
+
+.value-prop-description {
+    @apply text-gray-300 max-w-2xl mx-auto;
+}
+
+/* FAQ Section Styles */
+.faq-item {
+    @apply border-b border-gray-700 py-4;
+}
+
+.faq-question {
+    @apply flex justify-between items-center cursor-pointer text-white font-semibold;
+}
+
+.faq-answer {
+    @apply mt-3 text-gray-300 hidden;
+}
+
+.faq-answer.active {
+    @apply block;
+}
+
+/* Countdown Timer Styles */
+.countdown {
+    @apply flex justify-center space-x-6 text-center;
+}
+
+.countdown-item {
+    @apply bg-gray-700 p-4 rounded-lg;
+}
+
+.countdown-number {
+    @apply text-2xl font-bold text-yellow-400;
+}
+
+.countdown-label {
+    @apply text-sm text-gray-300 mt-1;
+}
+
+/* Progress Indicators */
+.progress-bar {
+    @apply w-full bg-gray-700 rounded-full h-2;
+}
+
+.progress-fill {
+    @apply bg-yellow-500 h-2 rounded-full transition-all duration-500;
+}
+
+/* Interactive Elements */
+.interactive-card {
+    @apply cursor-pointer transition-all duration-300;
+}
+
+.interactive-card:hover {
+    @apply transform scale-105 shadow-xl;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .speaker-card {
+        text-align: center;
+    }
+    
+    .benefit-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Accessibility Enhancements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #FBBF24;
+    }
+    
+    .speaker-card,
+    .benefit-card,
+    .testimonial-preview {
+        border: 1px solid #FBBF24;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .speaker-card,
+    .benefit-card,
+    .stat-item,
+    .interactive-card {
+        transition: none;
+    }
+    
+    .speaker-card:hover,
+    .benefit-card:hover,
+    .interactive-card:hover {
+        transform: none;
+    }
+}
+
+/* Text Alignment Rules */
+.card {
+    text-align: left;
+}
+
+.card .section-title {
+    text-align: left;
+}
+
+/* Center align specific sub-sections */
+#featured-speakers,
+#benefits,
+#stats,
+#social-proof {
+    text-align: center;
+}
+
+#featured-speakers .section-title,
+#benefits .section-title,
+#stats .section-title,
+#social-proof .section-title {
+    text-align: center;
+}
+
+/* Left align main content paragraphs and lists */
+.card p,
+.card ul,
+.card li {
+    text-align: left;
+}
+
+/* Center align specific elements within centered sections */
+#featured-speakers .grid,
+#benefits .grid,
+#stats .grid,
+#social-proof .grid {
+    text-align: center;
+}
+
+/* Ensure speaker info is centered within speaker cards */
+.speaker-info {
+    text-align: center;
+}
+
+/* Ensure benefit cards content is centered */
+.benefit-card {
+    text-align: center;
+}
+
+/* Ensure stats are centered */
+.stat-item {
+    text-align: center;
+}
+
+/* Print optimizations */
+@media print {
+    .speaker-overlay,
+    .benefit-icon,
+    .cta-button {
+        display: none !important;
+    }
+    
+    .speaker-card,
+    .benefit-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
