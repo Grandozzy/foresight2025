@@ -1,0 +1,14 @@
+# macOS artifacts
+.DS_Store
+
+# Build and generated files
+build.js
+
+# Backup HTML snapshots
+index-backup-*.html
+
+# Node modules or dependencies (if added later)
+node_modules/
+
+# Logs
+*.log

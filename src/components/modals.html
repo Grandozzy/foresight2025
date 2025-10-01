@@ -1,0 +1,104 @@
+<!-- Newsletter Modal -->
+<div id="newsletterModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-2xl font-bold text-white mb-2">Stay Updated</h3>
+            <button id="closeModal" class="modal-close">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <p class="text-gray-300 mb-6">Get the latest updates about the Songhai Leadership & Business Exchange, including speaker announcements, program details, and exclusive insights.</p>
+        <form id="newsletterForm" class="space-y-4">
+            <div>
+                <label for="newsletter-name" class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
+                <input type="text" id="newsletter-name" name="name" required class="form-input w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+            </div>
+            <div>
+                <label for="newsletter-email" class="block text-sm font-medium text-gray-300 mb-1">Email Address *</label>
+                <input type="email" id="newsletter-email" name="email" required class="form-input w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+            </div>
+            <div>
+                <label for="newsletter-organization" class="block text-sm font-medium text-gray-300 mb-1">Organization</label>
+                <input type="text" id="newsletter-organization" name="organization" class="form-input w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+            </div>
+            <div>
+                <label for="newsletter-interests" class="block text-sm font-medium text-gray-300 mb-1">Areas of Interest</label>
+                <div class="grid grid-cols-2 gap-2 mt-2">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="interests" value="strategic-planning" class="mr-2 text-yellow-500 focus:ring-yellow-500">
+                        <span class="text-sm text-gray-300">Strategic Planning</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="interests" value="partnerships" class="mr-2 text-yellow-500 focus:ring-yellow-500">
+                        <span class="text-sm text-gray-300">Partnerships</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="interests" value="innovation" class="mr-2 text-yellow-500 focus:ring-yellow-500">
+                        <span class="text-sm text-gray-300">Innovation</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="interests" value="networking" class="mr-2 text-yellow-500 focus:ring-yellow-500">
+                        <span class="text-sm text-gray-300">Networking</span>
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Subscribe to Updates
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Registration Modal -->
+<div id="registrationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-2xl font-bold text-white mb-2">Register for the Summit</h3>
+            <button id="closeRegistrationModal" class="modal-close">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <p class="text-gray-300 mb-6">Secure your spot at Ghana's premier strategic foresight summit. Early bird pricing available until September 2025.</p>
+        <div class="space-y-4 mb-6">
+            <div class="pricing-card">
+                <h4 class="font-semibold text-yellow-400">Early Bird (Until Sept 30, 2025)</h4>
+                <p class="text-2xl font-bold text-white">$299 <span class="text-sm text-gray-400">per person</span></p>
+                <p class="text-gray-300 text-sm">Includes all sessions, meals, and networking events</p>
+            </div>
+            <div class="pricing-card">
+                <h4 class="font-semibold text-yellow-400">Regular Registration</h4>
+                <p class="text-2xl font-bold text-white">$399 <span class="text-sm text-gray-400">per person</span></p>
+                <p class="text-gray-300 text-sm">Full access to all summit activities</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <p class="text-gray-300 mb-4">Registration will open soon. Get notified when registration is available:</p>
+            <button id="notifyMeBtn" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Notify Me When Registration Opens
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Back to Top Button -->
+<a href="#top" id="backToTopBtn" class="back-to-top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+    </svg>
+    Back to Top
+</a>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p class="text-white mt-4">Processing...</p>
+    </div>
+</div>

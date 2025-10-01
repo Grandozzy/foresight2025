@@ -112,11 +112,11 @@ function initializeModals() {
         });
     }
 
-    // Registration modal
-    if (registerBtn && registrationModal) {
+    // Registration button - navigate to RSVP page
+    if (registerBtn) {
         registerBtn.addEventListener('click', () => {
-            showModal(registrationModal);
-            trackEvent('registration_modal_open');
+            window.location.hash = 'rsvp-page';
+            trackEvent('register_button_click');
         });
     }
 
