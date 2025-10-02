@@ -12,6 +12,57 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeNavigation() {
     const pageContents = document.querySelectorAll('.page-content');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navLinksContainer = document.getElementById('primaryNavigation');
+    const mobileToggle = document.getElementById('mobileNavToggle');
+
+    const closeMobileNav = () => {
+        if (!navLinksContainer) return;
+        navLinksContainer.classList.add('hidden');
+        navLinksContainer.classList.remove('flex');
+        if (mobileToggle) {
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    };
+
+    const openMobileNav = () => {
+        if (!navLinksContainer) return;
+        navLinksContainer.classList.remove('hidden');
+        navLinksContainer.classList.add('flex');
+        if (mobileToggle) {
+            mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+    };
+
+    const toggleMobileNav = () => {
+        if (!navLinksContainer) return;
+        if (navLinksContainer.classList.contains('hidden')) {
+            openMobileNav();
+        } else {
+            closeMobileNav();
+        }
+    };
+
+    if (mobileToggle && navLinksContainer) {
+        mobileToggle.addEventListener('click', () => {
+            toggleMobileNav();
+            trackEvent('mobile_nav_toggle', {
+                state: navLinksContainer.classList.contains('hidden') ? 'closed' : 'open'
+            });
+        });
+    }
+
+    if (navLinksContainer) {
+        const syncNavState = () => {
+            if (window.innerWidth >= 768) {
+                openMobileNav();
+            } else {
+                closeMobileNav();
+            }
+        };
+
+        syncNavState();
+        window.addEventListener('resize', debounce(syncNavState, 150));
+    }
 
     function showPage(pageId) {
         // Hide all pages
@@ -58,6 +109,10 @@ function initializeNavigation() {
             e.preventDefault();
             const pageId = link.getAttribute('href').substring(1);
             window.location.hash = pageId;
+
+            if (window.innerWidth < 768) {
+                closeMobileNav();
+            }
         });
     });
 
@@ -552,6 +607,17 @@ function throttle(func, limit) {
             inThrottle = true;
             setTimeout(() => inThrottle = false, limit);
         }
+    };
+}
+
+// Utility function for debouncing
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
     };
 }
 
