@@ -1,0 +1,30 @@
+name: Deploy via FTP
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftps
+          server-dir: /path/on/server/            # TODO: update to your hosting web root
+          local-dir: .
+          exclude: |
+            **/.git*
+            **/.github/**
+            index-backup-*.html
+            .DS_Store
+            build.js
