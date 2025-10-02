@@ -9,9 +9,18 @@
                 </h3>
                 <p class="text-base text-gray-300">Sign up to receive early updates, the full agenda, and a free pre-event resource pack.</p>
             </div>
-            <div class="newsletter-embed w-full md:w-auto">
-                <div class="ml-embedded" data-form="MpR20k"></div>
-            </div>
+            <form id="footerNewsletterForm" action="https://formspree.io/f/xovkwweo" method="POST" class="newsletter-form w-full md:w-auto flex flex-col sm:flex-row sm:flex-wrap gap-3" data-require-name="false" novalidate>
+                <div class="w-full sm:flex-1">
+                    <label for="footer-email" class="sr-only">Email address</label>
+                    <input type="email" id="footer-email" name="email" required placeholder="Enter your email" class="newsletter-input form-input">
+                </div>
+                <button type="submit" class="newsletter-button">Join the Mailing List</button>
+                <label for="footer-consent" class="text-xs text-gray-500 flex items-start gap-2 w-full">
+                    <input type="checkbox" id="footer-consent" name="consent" required class="mt-1">
+                    <span>I agree to receive updates about the Songhai Exchange.</span>
+                </label>
+                <input type="hidden" name="form-name" value="footer-newsletter">
+            </form>
         </div>
         <div class="border-t border-gray-800 pt-6 space-y-2 text-sm text-gray-400">
             <p class="font-semibold text-gray-200">The Songhai Business &amp; Leadership Exchange</p>

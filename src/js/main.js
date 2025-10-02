@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeAnalytics();
 });
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xovkwweo';
+
 // Navigation functionality
 function initializeNavigation() {
     const pageContents = document.querySelectorAll('.page-content');
@@ -215,6 +217,7 @@ function initializeModals() {
 function initializeForms() {
     const contactForm = document.getElementById('contactForm');
     const newsletterForm = document.getElementById('newsletterForm');
+    const footerNewsletterForm = document.getElementById('footerNewsletterForm');
 
     if (contactForm) {
         contactForm.addEventListener('submit', handleContactForm);
@@ -222,6 +225,10 @@ function initializeForms() {
 
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', handleNewsletterForm);
+    }
+
+    if (footerNewsletterForm) {
+        footerNewsletterForm.addEventListener('submit', handleNewsletterForm);
     }
 
     // Add real-time validation
@@ -251,12 +258,12 @@ async function handleContactForm(e) {
         // Simulate API call
         await simulateAPICall(data, 'contact');
         
-        showMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
+        showMessage('Thank you for your message! We\'ll get back to you soon.', 'success', form);
         form.reset();
         trackEvent('contact_form_submit', { subject: data.subject });
         
     } catch (error) {
-        showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+        showMessage('Sorry, there was an error sending your message. Please try again.', 'error', form);
         trackEvent('contact_form_error', { error: error.message });
     } finally {
         hideLoading();
@@ -268,39 +275,52 @@ async function handleNewsletterForm(e) {
     e.preventDefault();
     
     const form = e.target;
+    const requireName = form.dataset.requireName === 'true';
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    
-    // Get selected interests
-    const interests = Array.from(form.querySelectorAll('input[name="interests"]:checked'))
-        .map(cb => cb.value);
+    const interests = Array.from(form.querySelectorAll('input[name="interests"]:checked')).map(cb => cb.value);
     data.interests = interests;
+    if (interests.length > 0) {
+        formData.delete('interests');
+        interests.forEach(value => formData.append('interests[]', value));
+    }
 
-    // Validate form
-    if (!validateNewsletterForm(data)) {
+    if (!validateNewsletterForm(data, { requireName, form })) {
         return;
     }
 
     showLoading();
     
     try {
-        // Simulate API call
-        await simulateAPICall(data, 'newsletter');
-        
-        showMessage('Successfully subscribed! You\'ll receive updates about the summit.', 'success');
+        const endpoint = form.getAttribute('action') || FORMSPREE_ENDPOINT;
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Subscription failed');
+        }
+
+        showMessage('Successfully subscribed! You\'ll receive updates about the summit.', 'success', form);
         form.reset();
         
         // Close modal after success
-        setTimeout(() => {
-            const modal = document.getElementById('newsletterModal');
-            hideModal(modal);
-        }, 2000);
+        if (form.id === 'newsletterForm') {
+            setTimeout(() => {
+                const modal = document.getElementById('newsletterModal');
+                hideModal(modal);
+            }, 2000);
+        }
         
-        trackEvent('newsletter_signup', { interests: interests });
+        trackEvent('newsletter_signup', { interests: interests, source: form.id });
         
     } catch (error) {
-        showMessage('Sorry, there was an error with your subscription. Please try again.', 'error');
-        trackEvent('newsletter_signup_error', { error: error.message });
+        showMessage('Sorry, there was an error with your subscription. Please try again.', 'error', form);
+        trackEvent('newsletter_signup_error', { error: error.message, source: form.id });
     } finally {
         hideLoading();
     }
@@ -329,23 +349,36 @@ function validateContactForm(data) {
         showFieldError('message', 'Please enter a message (at least 10 characters)');
         isValid = false;
     }
-    
+
     return isValid;
 }
 
-function validateNewsletterForm(data) {
+function validateNewsletterForm(data, options = {}) {
+    const { requireName = true, form = null } = options;
     let isValid = true;
-    
-    if (!data.name || data.name.trim().length < 2) {
-        showFieldError('newsletter-name', 'Please enter a valid name');
-        isValid = false;
+
+    if (requireName) {
+        if (!data.name || data.name.trim().length < 2) {
+            showFieldError('newsletter-name', 'Please enter a valid name');
+            isValid = false;
+        }
     }
-    
+
     if (!data.email || !isValidEmail(data.email)) {
-        showFieldError('newsletter-email', 'Please enter a valid email address');
+        const emailField = form ? form.querySelector('input[name="email"]') : null;
+        const fieldId = emailField && emailField.id ? emailField.id : 'newsletter-email';
+        showFieldError(fieldId, 'Please enter a valid email address');
         isValid = false;
     }
-    
+
+    if (form && isValid) {
+        const consentField = form.querySelector('input[name="consent"]');
+        if (consentField && !data.consent) {
+            showMessage('Please confirm you agree to receive updates.', 'error', form);
+            isValid = false;
+        }
+    }
+
     return isValid;
 }
 
@@ -410,7 +443,7 @@ function hideLoading() {
     }
 }
 
-function showMessage(text, type = 'info') {
+function showMessage(text, type = 'info', targetForm = null) {
     // Remove existing messages
     const existingMessages = document.querySelectorAll('.message');
     existingMessages.forEach(msg => msg.remove());
@@ -420,11 +453,14 @@ function showMessage(text, type = 'info') {
     message.textContent = text;
     
     // Insert at the top of the active form or modal
-    const activeModal = document.querySelector('.modal.show');
-    const activeForm = activeModal ? activeModal.querySelector('form') : document.querySelector('form');
-    
-    if (activeForm) {
-        activeForm.insertBefore(message, activeForm.firstChild);
+    if (targetForm) {
+        targetForm.insertBefore(message, targetForm.firstChild);
+    } else {
+        const activeModal = document.querySelector('.modal.show');
+        const activeForm = activeModal ? activeModal.querySelector('form') : document.querySelector('form');
+        if (activeForm) {
+            activeForm.insertBefore(message, activeForm.firstChild);
+        }
     }
     
     // Auto-remove after 5 seconds
@@ -620,6 +656,7 @@ function debounce(func, wait) {
         timeout = setTimeout(() => func.apply(context, args), wait);
     };
 }
+
 
 // Performance monitoring
 function initializePerformanceMonitoring() {
